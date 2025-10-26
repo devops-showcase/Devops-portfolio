@@ -88,13 +88,13 @@ pipeline {
                             --instance-ids "\$INSTANCE_ID" \
                             --document-name "AWS-RunShellScript" \
                             --comment "Deploying portfolio app" \
-                            --parameters commands="[
-                                'docker stop portfolio || true',
-                                'docker rm portfolio || true',
-                                'aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin \${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com',
-                                'docker pull \${ECR_URL}:${IMAGE_TAG}',
-                                'docker run -d --name portfolio -p 9091:80 \${ECR_URL}:${IMAGE_TAG}'
-                            ]"
+                            --parameters commands='[
+                                "docker stop portfolio || true",
+                                "docker rm portfolio || true",
+                                "aws ecr get-login-password --region '"$AWS_REGION"' | docker login --username AWS --password-stdin '"\${ACCOUNT_ID}"'.dkr.ecr.'"$AWS_REGION"'.amazonaws.com",
+                                "docker pull '"\${ECR_URL}"':'"${IMAGE_TAG}"'",
+                                "docker run -d --name portfolio -p 9091:80 '"\${ECR_URL}"':'"${IMAGE_TAG}"'"
+                            ]'
 
                         echo "Deployment complete!"
                     """
