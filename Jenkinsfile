@@ -6,7 +6,7 @@ pipeline {
     }
 
     triggers {
-        githubPush()   // Automatically triggers when GitHub webhook fires
+        githubPush()
     }
 
     stages {
@@ -20,7 +20,8 @@ pipeline {
         stage('Set Image Tag') {
             steps {
                 script {
-                    IMAGE_TAG = "${env.GIT_COMMIT.take(7)}"  // first 7 chars of commit
+                    // Safely get the current commit hash
+                    IMAGE_TAG = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
                     echo "Docker image tag: ${IMAGE_TAG}"
                 }
             }
