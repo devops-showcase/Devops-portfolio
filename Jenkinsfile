@@ -20,8 +20,8 @@ pipeline {
         stage('Set Image Tag') {
             steps {
                 script {
-                    IMAGE_TAG = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-                    echo "Docker image tag: ${IMAGE_TAG}"
+                    env.IMAGE_TAG = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    echo "Docker image tag: ${env.IMAGE_TAG}"
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
                 script {
                     sh '''
                         echo "Building Docker image..."
-                        docker build -t $IMAGE_NAME:${IMAGE_TAG} .
+                        docker build -t $IMAGE_NAME:$IMAGE_TAG .
                     '''
                 }
             }
@@ -52,8 +52,8 @@ pipeline {
                         aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
                         
                         echo "Tagging and pushing image..."
-                        docker tag $IMAGE_NAME:${IMAGE_TAG} ${ECR_URL}:${IMAGE_TAG}
-                        docker push ${ECR_URL}:${IMAGE_TAG}
+                        docker tag $IMAGE_NAME:$IMAGE_TAG ${ECR_URL}:$IMAGE_TAG
+                        docker push ${ECR_URL}:$IMAGE_TAG
                     '''
                 }
             }
@@ -91,8 +91,8 @@ pipeline {
                                 \"docker stop portfolio || true\",
                                 \"docker rm portfolio || true\",
                                 \"aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com\",
-                                \"docker pull ${ECR_URL}:${IMAGE_TAG}\",
-                                \"docker run -d --name portfolio -p 9091:80 ${ECR_URL}:${IMAGE_TAG}\"
+                                \"docker pull ${ECR_URL}:$IMAGE_TAG\",
+                                \"docker run -d --name portfolio -p 9091:80 ${ECR_URL}:$IMAGE_TAG\"
                             ]"
 
                         echo "Deployment complete!"
