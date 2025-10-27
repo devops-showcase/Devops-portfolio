@@ -90,7 +90,17 @@ pipeline {
 
                         echo "Instance ID found: $INSTANCE_ID"
 
-                        COMMAND_ID=$(aws ssm send-command --instance-ids "$INSTANCE_ID" --document-name "AWS-RunShellScript" --comment "Deploying portfolio app" --parameters "commands=[\"docker stop portfolio || true\",\"docker rm portfolio || true\",\"aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com\",\"docker pull ${ECR_URL}:$IMAGE_TAG\",\"docker run -d --name portfolio -p 9091:80 ${ECR_URL}:$IMAGE_TAG\"]" --query "Command.CommandId" --output text)
+                        # Build the commands array properly
+                        COMMANDS='["docker stop portfolio || true","docker rm portfolio || true","aws ecr get-login-password --region '"$AWS_REGION"' | docker login --username AWS --password-stdin '"${ACCOUNT_ID}"'.dkr.ecr.'"$AWS_REGION"'.amazonaws.com","docker pull '"${ECR_URL}"':'"$IMAGE_TAG"'","docker run -d --name portfolio -p 9091:80 '"${ECR_URL}"':'"$IMAGE_TAG"'"]'
+
+                        echo "Sending SSM command..."
+                        COMMAND_ID=$(aws ssm send-command \
+                            --instance-ids "$INSTANCE_ID" \
+                            --document-name "AWS-RunShellScript" \
+                            --comment "Deploying portfolio app" \
+                            --parameters commands="$COMMANDS" \
+                            --query "Command.CommandId" \
+                            --output text)
 
                         echo "SSM Command ID: $COMMAND_ID"
                         echo "Waiting for command to complete..."
@@ -105,4 +115,3 @@ pipeline {
         
     }
 }
-
