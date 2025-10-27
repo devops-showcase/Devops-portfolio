@@ -91,8 +91,28 @@ pipeline {
                         echo "Instance ID found: $INSTANCE_ID"
                         echo "Deploying image: $FULL_IMAGE"
 
-                        # Send deployment command - all on one line
-                        aws ssm send-command --instance-ids "$INSTANCE_ID" --document-name "AWS-RunShellScript" --comment "Deploy Portfolio" --parameters "commands=['echo Starting deployment...','export PATH=/usr/local/bin:/usr/bin:/bin','/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}','/usr/bin/docker stop portfolio || true','/usr/bin/docker rm portfolio || true','/usr/bin/docker pull ${FULL_IMAGE}','/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}','/usr/bin/docker ps | grep portfolio']"
+                        # Build commands as a JSON file to avoid quote escaping issues
+                        cat > /tmp/ssm-commands.json <<EOF
+{
+  "commands": [
+    "echo 'Starting deployment...'",
+    "export PATH=/usr/local/bin:/usr/bin:/bin",
+    "/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}",
+    "/usr/bin/docker stop portfolio || true",
+    "/usr/bin/docker rm portfolio || true",
+    "/usr/bin/docker pull ${FULL_IMAGE}",
+    "/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}",
+    "/usr/bin/docker ps | grep portfolio"
+  ]
+}
+EOF
+
+                        # Send deployment command using the JSON file
+                        aws ssm send-command \
+                          --instance-ids "$INSTANCE_ID" \
+                          --document-name "AWS-RunShellScript" \
+                          --comment "Deploy Portfolio" \
+                          --cli-input-json file:///tmp/ssm-commands.json
                         
                         echo "Deployment complete!"
                     '''
