@@ -91,21 +91,8 @@ pipeline {
                         echo "Instance ID found: $INSTANCE_ID"
                         echo "Deploying image: $FULL_IMAGE"
 
-                        # Send deployment command
-                        aws ssm send-command \
-                          --instance-ids "$INSTANCE_ID" \
-                          --document-name "AWS-RunShellScript" \
-                          --comment "Deploy Portfolio" \
-                          --parameters commands="[
-                            'echo \"Starting deployment...\"',
-                            'export PATH=/usr/local/bin:/usr/bin:/bin',
-                            '/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}',
-                            '/usr/bin/docker stop portfolio || true',
-                            '/usr/bin/docker rm portfolio || true',
-                            '/usr/bin/docker pull ${FULL_IMAGE}',
-                            '/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}',
-                            '/usr/bin/docker ps | grep portfolio'
-                          ]"
+                        # Send deployment command - all on one line
+                        aws ssm send-command --instance-ids "$INSTANCE_ID" --document-name "AWS-RunShellScript" --comment "Deploy Portfolio" --parameters "commands=['echo Starting deployment...','export PATH=/usr/local/bin:/usr/bin:/bin','/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}','/usr/bin/docker stop portfolio || true','/usr/bin/docker rm portfolio || true','/usr/bin/docker pull ${FULL_IMAGE}','/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}','/usr/bin/docker ps | grep portfolio']"
                         
                         echo "Deployment complete!"
                     '''
