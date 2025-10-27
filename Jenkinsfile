@@ -10,7 +10,6 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout Code') {
             steps {
                 checkout scm
@@ -69,19 +68,21 @@ pipeline {
                 ]) {
                     sh '''
                         echo "Deploying to EC2 via SSM..."
-                        
                         export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
                         export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
                         export AWS_DEFAULT_REGION=$AWS_REGION
-                        
+
                         ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
                         ECR_REGISTRY="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
                         ECR_URL="${ECR_REGISTRY}/${ECR_REPOSITORY##*/}"
                         FULL_IMAGE="${ECR_URL}:${IMAGE_TAG}"
 
-                        echo "Looking for EC2 instance with tag Name=$EC2_HOST"
+                        echo "Looking for EC2 instance with tag Name=$EC2_HOST in region $AWS_REGION..."
                         
-                        INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$EC2_HOST" "Name=instance-state-name,Values=running" --query "Reservations[0].Instances[0].InstanceId" --output text)
+                        INSTANCE_ID=$(aws ec2 describe-instances \
+                            --filters "Name=tag:Name,Values=$EC2_HOST" "Name=instance-state-name,Values=running" \
+                            --query "Reservations[0].Instances[0].InstanceId" \
+                            --output text)
 
                         if [ "$INSTANCE_ID" = "None" ] || [ -z "$INSTANCE_ID" ]; then
                             echo "ERROR: No running EC2 instance found with tag Name=$EC2_HOST"
@@ -91,35 +92,34 @@ pipeline {
                         echo "Instance ID found: $INSTANCE_ID"
                         echo "Deploying image: $FULL_IMAGE"
 
-                        # Build commands as a JSON file with correct structure
-                        cat > /tmp/ssm-commands.json <<EOF
+                        # Create SSM JSON
+                        cat <<EOF > /tmp/ssm-commands.json
 {
   "InstanceIds": ["${INSTANCE_ID}"],
   "DocumentName": "AWS-RunShellScript",
-  "Comment": "Deploy Portfolio",
+  "Comment": "Deploy Portfolio via Jenkins",
   "Parameters": {
     "commands": [
-      "echo 'Starting deployment...'",
+      "echo 'Starting deployment on $(hostname)'",
       "export PATH=/usr/local/bin:/usr/bin:/bin",
-      "/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}",
-      "/usr/bin/docker stop portfolio || true",
-      "/usr/bin/docker rm portfolio || true",
-      "/usr/bin/docker pull ${FULL_IMAGE}",
-      "/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}",
-      "/usr/bin/docker ps | grep portfolio"
+      "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}",
+      "docker stop portfolio || true",
+      "docker rm portfolio || true",
+      "docker pull ${FULL_IMAGE}",
+      "docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}",
+      "docker ps | grep portfolio"
     ]
   }
 }
 EOF
 
-                        # Send deployment command using the JSON file
-                        aws ssm send-command --cli-input-json file:///tmp/ssm-commands.json
-                        
-                        echo "Deployment complete!"
+                        echo "Sending command via SSM..."
+                        aws ssm send-command --cli-input-json file:///tmp/ssm-commands.json --output json
+
+                        echo "Deployment command sent successfully!"
                     '''
                 }
             }
         }
-        
     }
 }
