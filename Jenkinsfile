@@ -91,28 +91,29 @@ pipeline {
                         echo "Instance ID found: $INSTANCE_ID"
                         echo "Deploying image: $FULL_IMAGE"
 
-                        # Build commands as a JSON file to avoid quote escaping issues
+                        # Build commands as a JSON file with correct structure
                         cat > /tmp/ssm-commands.json <<EOF
 {
-  "commands": [
-    "echo 'Starting deployment...'",
-    "export PATH=/usr/local/bin:/usr/bin:/bin",
-    "/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}",
-    "/usr/bin/docker stop portfolio || true",
-    "/usr/bin/docker rm portfolio || true",
-    "/usr/bin/docker pull ${FULL_IMAGE}",
-    "/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}",
-    "/usr/bin/docker ps | grep portfolio"
-  ]
+  "InstanceIds": ["${INSTANCE_ID}"],
+  "DocumentName": "AWS-RunShellScript",
+  "Comment": "Deploy Portfolio",
+  "Parameters": {
+    "commands": [
+      "echo 'Starting deployment...'",
+      "export PATH=/usr/local/bin:/usr/bin:/bin",
+      "/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}",
+      "/usr/bin/docker stop portfolio || true",
+      "/usr/bin/docker rm portfolio || true",
+      "/usr/bin/docker pull ${FULL_IMAGE}",
+      "/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}",
+      "/usr/bin/docker ps | grep portfolio"
+    ]
+  }
 }
 EOF
 
                         # Send deployment command using the JSON file
-                        aws ssm send-command \
-                          --instance-ids "$INSTANCE_ID" \
-                          --document-name "AWS-RunShellScript" \
-                          --comment "Deploy Portfolio" \
-                          --cli-input-json file:///tmp/ssm-commands.json
+                        aws ssm send-command --cli-input-json file:///tmp/ssm-commands.json
                         
                         echo "Deployment complete!"
                     '''
