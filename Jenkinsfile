@@ -75,7 +75,9 @@ pipeline {
                         export AWS_DEFAULT_REGION=$AWS_REGION
                         
                         ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-                        ECR_URL="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY##*/}"
+                        ECR_REGISTRY="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+                        ECR_URL="${ECR_REGISTRY}/${ECR_REPOSITORY##*/}"
+                        FULL_IMAGE="${ECR_URL}:${IMAGE_TAG}"
 
                         echo "Looking for EC2 instance with tag Name=$EC2_HOST"
                         
@@ -83,29 +85,27 @@ pipeline {
 
                         if [ "$INSTANCE_ID" = "None" ] || [ -z "$INSTANCE_ID" ]; then
                             echo "ERROR: No running EC2 instance found with tag Name=$EC2_HOST"
-                            echo "Available instances:"
-                            aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].[InstanceId,Tags[?Key=='Name'].Value|[0]]" --output table
                             exit 1
                         fi
 
                         echo "Instance ID found: $INSTANCE_ID"
+                        echo "Deploying image: $FULL_IMAGE"
 
-                        # Build the commands array properly
-                        COMMANDS='["docker stop portfolio || true","docker rm portfolio || true","aws ecr get-login-password --region '"$AWS_REGION"' | docker login --username AWS --password-stdin '"${ACCOUNT_ID}"'.dkr.ecr.'"$AWS_REGION"'.amazonaws.com","docker pull '"${ECR_URL}"':'"$IMAGE_TAG"'","docker run -d --name portfolio -p 9091:80 '"${ECR_URL}"':'"$IMAGE_TAG"'"]'
-
-                        echo "Sending SSM command..."
-                        COMMAND_ID=$(aws ssm send-command \
-                            --instance-ids "$INSTANCE_ID" \
-                            --document-name "AWS-RunShellScript" \
-                            --comment "Deploying portfolio app" \
-                            --parameters commands="$COMMANDS" \
-                            --query "Command.CommandId" \
-                            --output text)
-
-                        echo "SSM Command ID: $COMMAND_ID"
-                        echo "Waiting for command to complete..."
-                        
-                        aws ssm wait command-executed --command-id "$COMMAND_ID" --instance-id "$INSTANCE_ID"
+                        # Send deployment command
+                        aws ssm send-command \
+                          --instance-ids "$INSTANCE_ID" \
+                          --document-name "AWS-RunShellScript" \
+                          --comment "Deploy Portfolio" \
+                          --parameters commands="[
+                            'echo \"Starting deployment...\"',
+                            'export PATH=/usr/local/bin:/usr/bin:/bin',
+                            '/usr/bin/aws ecr get-login-password --region ${AWS_REGION} | /usr/bin/docker login --username AWS --password-stdin ${ECR_REGISTRY}',
+                            '/usr/bin/docker stop portfolio || true',
+                            '/usr/bin/docker rm portfolio || true',
+                            '/usr/bin/docker pull ${FULL_IMAGE}',
+                            '/usr/bin/docker run -d --name portfolio -p 9091:80 ${FULL_IMAGE}',
+                            '/usr/bin/docker ps | grep portfolio'
+                          ]"
                         
                         echo "Deployment complete!"
                     '''
