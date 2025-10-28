@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
-
 <body>
   <!-- Hero Section -->
   <section class="hero">
@@ -40,10 +39,7 @@
         <h3>DevOps Showcase</h3>
         <p>
           <strong>Cloud Development Environment with CI/CD Pipeline</strong><br/>
-          Overview: A fully automated cloud-based development environment using code-server,
-          deployed on AWS EC2 with a complete CI/CD pipeline. This project demonstrates
-          modern DevOps practices including containerization, infrastructure automation,
-          and secure deployment strategies.
+          Fully automated cloud-based dev environment using code-server, deployed on AWS EC2 with a complete CI/CD pipeline. Demonstrates containerization, infrastructure automation, and secure deployments.
         </p>
         <p>
           <a href="https://github.com/devops-showcase/devops-showcase" target="_blank">GitHub Repo</a> |
@@ -52,34 +48,74 @@
       </div>
 
       <div class="project-card">
-        <h3>My Other Portfolio</h3>
-        <p>A showcase of my work and personal projects.</p>
+        <h3>DevOps Portfolio Website</h3>
         <p>
-          <a href="https://ubatrillion.wixsite.com/my-site" target="_blank">Visit Site</a>
+          Demonstrates a full CI/CD pipeline from code commit to live deployment on AWS. Integrated Trivy scans, Dockerized deployment, and AWS CloudFront for global delivery.
+        </p>
+        <p>
+          <a href="https://github.com/devops-showcase/Devops-portfolio" target="_blank">GitHub Repo</a> |
+          <a href="https://ubatrillion.wixsite.com/my-site" target="_blank">Live Portfolio</a>
+        </p>
+      </div>
+
+      <div class="project-card">
+        <h3>End-to-End Automation</h3>
+        <p>
+          Automated provisioning and deployments with GitLab CI, GitHub Actions, and Argo CD, reducing manual releases by 80%.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <h3>Observability & Monitoring</h3>
+        <p>
+          Deployed Prometheus/Grafana dashboards to improve uptime (99.9%) and accelerate incident response by 70%.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <h3>DevSecOps Integration</h3>
+        <p>
+          Integrated Trivy and Vault into CI/CD pipelines for automated vulnerability scanning and secure secrets management.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <h3>Cloud Cost Optimization</h3>
+        <p>
+          Reduced AWS costs by 35% through EC2 right-sizing and RDS tuning.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Featured Projects Section (Beautified) -->
+  <!-- Featured Projects Section -->
   <section class="featured-projects">
     <div class="container">
-      <h2>Featured Projects</h2>
-
+      <h2>Featured Skills</h2>
       <div class="projects-grid">
         <div class="project-card">
-          <h3>CI/CD Pipeline with Jenkins</h3>
-          <p>Automated build and deployment pipelines using Jenkins and Docker for faster, reliable delivery.</p>
+          <h3>CI/CD Pipelines</h3>
+          <p>Jenkins, GitHub Actions, GitLab CI, Tekton, GitOps with Argo CD</p>
         </div>
-
         <div class="project-card">
-          <h3>Microservices on Kubernetes</h3>
-          <p>Deployed and managed microservices with Docker containers orchestrated by Kubernetes.</p>
+          <h3>Containers & Orchestration</h3>
+          <p>Docker, Kubernetes, Helm, Nginx, Apache Tomcat, Rancher</p>
         </div>
-
         <div class="project-card">
-          <h3>Serverless AWS Architecture</h3>
-          <p>Built event-driven workflows using AWS Lambda, S3, DynamoDB, and SNS for scalable cloud automation.</p>
+          <h3>Cloud Platforms</h3>
+          <p>AWS (EKS, EC2, S3, RDS, CloudFront), Azure, GCP, DigitalOcean</p>
+        </div>
+        <div class="project-card">
+          <h3>Security & DevSecOps</h3>
+          <p>IAM, TLS, Trivy, Vault, Cert-Manager, Security Groups</p>
+        </div>
+        <div class="project-card">
+          <h3>Monitoring & Logging</h3>
+          <p>Prometheus, Grafana, OpenTelemetry, CloudWatch, ELK/EFK Stack</p>
+        </div>
+        <div class="project-card">
+          <h3>Infrastructure as Code</h3>
+          <p>Terraform, CloudFormation, Ansible, Argo CD</p>
         </div>
       </div>
     </div>
@@ -89,12 +125,21 @@
   <section class="contact" id="contact">
     <div class="container">
       <h2>Get In Touch</h2>
-      <p>You can reach me via email, phone, or LinkedIn:</p>
+      <p>Reach out to me via email, phone, or LinkedIn:</p>
       <ul>
         <li>Email: <a href="mailto:Perpyayogu@gmail.com">Perpyayogu@gmail.com</a></li>
         <li>Phone: <a href="tel:+15108203736">+1 510 820 3736</a></li>
-        <li>LinkedIn: <a href="http://linkedin.com/in/ayogu-perpetua-b0b210236" target="_blank">View Profile</a></li>
+        <li>LinkedIn: <a href="https://linkedin.com/in/ayogu-perpetua-b0b210236" target="_blank">View Profile</a></li>
       </ul>
+
+      <!-- Contact Form -->
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="hero-btn contact-btn">Send Message</button>
+        <p id="formStatus"></p>
+      </form>
     </div>
   </section>
 </body>

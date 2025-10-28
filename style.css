@@ -1,14 +1,28 @@
-/* ===== Global Styles ===== */
+/* ===========================
+   🌐 GLOBAL STYLES
+=========================== */
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f7fa;
+  background-color: #f4f6f8;
   color: #333;
   scroll-behavior: smooth;
 }
 
-/* ===== Hero Section ===== */
+h1, h2, h3 {
+  font-weight: 600;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===========================
+   🎯 HERO SECTION
+=========================== */
 .hero {
   background: linear-gradient(135deg, #007bff, #00b4d8);
   color: white;
@@ -22,16 +36,29 @@ body {
 }
 
 .profile-pic {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
+  border: 5px solid white;
   object-fit: cover;
-  border: 4px solid white;
+  margin-bottom: 20px;
 }
 
-/* ===== Hero Quick Links ===== */
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+}
+
+/* ===========================
+   ⚡ HERO BUTTON LINKS
+=========================== */
 .hero-links {
-  margin-top: 25px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -39,16 +66,22 @@ body {
 }
 
 .hero-btn {
+  display: inline-block;
   padding: 12px 25px;
   border-radius: 25px;
   font-weight: bold;
   text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
 }
 
 .resume-btn {
-  background-color: #ffd700; /* gold */
+  background-color: #ffd700;
   color: #007bff;
 }
 
@@ -57,7 +90,7 @@ body {
 }
 
 .projects-btn {
-  background-color: #00b4d8; /* blue */
+  background-color: #00b4d8;
 }
 
 .projects-btn:hover {
@@ -65,21 +98,18 @@ body {
 }
 
 .contact-btn {
-  background-color: #ff6b6b; /* red/pink */
+  background-color: #ff6b6b;
 }
 
 .contact-btn:hover {
   background-color: #ff4c4c;
 }
 
-.hero-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-/* ===== Explore My Projects Section ===== */
+/* ===========================
+   🧩 PROJECTS SECTION
+=========================== */
 .projects {
-  background-color: #f0f4f8;
+  background-color: #f9fbfd;
   padding: 80px 20px;
   text-align: center;
 }
@@ -93,38 +123,29 @@ body {
   font-size: 2.5rem;
   margin-bottom: 40px;
   color: #007bff;
+  position: relative;
+}
+
+.projects h2::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: #00b4d8;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 2px;
 }
 
 .project-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 15px;
   padding: 25px;
   margin: 20px 0;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card h3 {
-  margin-top: 0;
-  color: #007bff;
-  font-size: 1.3rem;
-}
-
-.project-card p {
-  margin: 10px 0 0;
-  color: #555;
-  line-height: 1.5;
-}
-
-.project-card a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.project-card a:hover {
-  text-decoration: underline;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px);
 }
 
 .project-card:hover {
@@ -132,41 +153,84 @@ body {
   box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
-/* ===== Featured Projects Section ===== */
-.featured-projects {
-  background-color: #f5f7fa;
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.featured-projects .container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.featured-projects h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
+.project-card h3 {
   color: #007bff;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
 
+.project-card p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.project-card a {
+  color: #00b4d8;
+  font-weight: bold;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+
+/* Scroll animation for when in view */
+.project-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease-out;
+}
+
+/* ===========================
+   💼 FEATURED PROJECTS GRID
+=========================== */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
 
-/* ===== Contact Section ===== */
+.featured-projects .project-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.featured-projects .project-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================
+   📞 CONTACT SECTION
+=========================== */
 .contact {
   background: #007bff;
   color: white;
   padding: 80px 20px;
   text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.contact.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact h2 {
+  font-size: 2.3rem;
+  margin-bottom: 20px;
+}
+
+.contact p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
 }
 
 .contact a {
   color: #ffd700;
-  text-decoration: none;
+  font-weight: bold;
 }
 
 .contact a:hover {
@@ -180,5 +244,17 @@ body {
 
 .contact li {
   margin: 10px 0;
+}
+
+/* ===========================
+   🦶 FOOTER (Optional)
+=========================== */
+footer {
+  background: #f0f4f8;
+  color: #666;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  border-top: 1px solid #ddd;
 }
 
