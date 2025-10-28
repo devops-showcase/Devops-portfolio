@@ -55,15 +55,15 @@ This portfolio website is a live demonstration of DevOps practices, including:
 
 ## 🌐 Access
 
-- **Portfolio Website**: [Your live URL here]  
-- **Source Code**: [GitHub Repository link]  
+- **Portfolio Website**: https://d8oamidwzp0fn.cloudfront.net/#contact 
 
 ---
 
 ## 📫 Contact
 
 - **Email**: Perpyayogu@gmail.com  
-- **Phone**: +1 510-820-3736  
+- **Phone**: +1 510-820-3736
+  
 
 ---
 
