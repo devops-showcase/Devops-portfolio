@@ -1,74 +1,70 @@
-📘 README.md (Recruiter-Friendly Version)
 # 🌐 DevOps Portfolio Website
 
-This is my **personal DevOps portfolio website**, showcasing my skills in **CI/CD, cloud deployment, containerization, and DevSecOps**.  
-The website demonstrates a real-world end-to-end DevOps pipeline — from **code commit to live deployment** on AWS.
+This is my **personal DevOps portfolio website**, showcasing my expertise in **CI/CD, cloud deployment, containerization, and DevSecOps**.  
+The project demonstrates a complete **end-to-end DevOps pipeline** — from **code commit to live deployment** on AWS.
 
 ---
 
-## 🚀 Project Highlights
+## 🚀 Project Overview
 
-- **Automated CI/CD Pipeline**: Built with **Jenkins**, triggered on GitHub commits.  
-- **Containerized Deployment**: Dockerized web app deployed on **AWS EC2**.  
-- **Global Delivery**: Optimized for speed using **AWS CloudFront CDN**.  
-- **Security Practices**: Integrated **Trivy** for vulnerability and misconfiguration scanning.  
-- **Real-Time Deployment**: Updates automatically with each commit to the repository.
+This portfolio website is a live demonstration of DevOps practices, including:
 
----
-
-## ⚙️ Tech Stack & Tools
-
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | HTML, CSS, JavaScript |
-| **Containerization** | Docker |
-| **CI/CD** | Jenkins Pipeline |
-| **Cloud Hosting** | AWS EC2 |
-| **Content Delivery** | AWS CloudFront |
-| **Version Control** | Git & GitHub |
-| **Security** | Trivy (Vulnerability & Misconfiguration Scanning) |
-| **Monitoring & Logging** | Docker logs & Jenkins console |
+- **Automated CI/CD Pipeline**: Using **Jenkins**, the pipeline triggers on GitHub commits to build, test, and deploy the application.  
+- **Containerized Deployment**: The web app is Dockerized and deployed on **AWS EC2**, ensuring portability and consistent runtime environments.  
+- **Global Delivery**: **AWS CloudFront** is configured for content delivery, ensuring faster load times and better user experience.  
+- **Security Integration**: **Trivy** is used for container vulnerability scanning, configuration checks, and secret detection.  
+- **Real-Time Updates**: Every commit automatically updates the live site without manual intervention.
 
 ---
 
-## 🧩 Architecture Overview
+## ⚙️ Tech Stack
 
-```mermaid
-graph TD
-    A[GitHub Repo] -->|Push Event| B[Jenkins Pipeline]
-    B --> C[Docker Build & Trivy Scan]
-    C --> D[AWS EC2 Container Deployment]
-    D --> E[AWS CloudFront Distribution]
-    E --> F[End Users 🌎]
-📦 Deployment Workflow
+| Layer                  | Technology                                      |
+|------------------------|------------------------------------------------|
+| **Frontend**           | HTML, CSS, JavaScript                           |
+| **Containerization**   | Docker                                          |
+| **CI/CD**              | Jenkins Pipeline                                |
+| **Cloud Hosting**      | AWS EC2                                        |
+| **Content Delivery**   | AWS CloudFront                                  |
+| **Version Control**    | Git & GitHub                                   |
+| **Security & Compliance** | Trivy (Vulnerability & Misconfiguration Scan) |
+| **Monitoring & Logs**  | Docker logs & Jenkins console                   |
 
-1️⃣ Local Testing
-docker build -t portfolio-site .
-docker run -d -p 80:80 portfolio-site
-Open: http://localhost
+---
 
-2️⃣ CI/CD Pipeline
-Jenkins pipeline triggered on GitHub push.
-Stages include:
-Checkout latest code
-Docker Build and Trivy Scan
-Push Docker image to AWS ECR
-Deploy container on EC2 via SSM
+## 🛠 Pipeline & Deployment
 
-3️⃣ Security Scan
-trivy fs --scanners vuln,misconfig,secret --exit-code 0 --format table .
-Detects vulnerabilities, misconfigurations, and secrets in codebase or filesystem.
+1. **Code Commit**: Push changes to GitHub repository.  
+2. **Jenkins Trigger**: Jenkins detects the commit via webhook.  
+3. **Build Docker Image**: Pipeline builds a Docker image tagged with the Git commit hash.  
+4. **Push to AWS ECR**: Docker image is pushed to AWS Elastic Container Registry.  
+5. **Deploy via SSM**: Jenkins uses **AWS Systems Manager (SSM)** to deploy the Docker container on EC2.  
+6. **Live Update**: The container runs on the server and is accessible through **CloudFront**.  
 
-4️⃣ CloudFront Integration
-Configured CloudFront distribution pointing to EC2 container.
-Optional HTTPS & custom domain support.
-Reduces latency and improves performance globally.
-🔒 DevSecOps Integration
-Trivy Scanning is integrated directly into the Jenkins pipeline.
-Prevents insecure deployments by failing builds on high-risk vulnerabilities.
-Supports continuous security monitoring for containerized applications.
-📞 Contact & Portfolio
-Perpetua Ayogu
-📧 Perpyayogu@gmail.com
-📱 +1 (510) 820-3736
-🌍 LinkedIn:http://linkedin.com/in/ayogu-perpetua-b0b210236
+---
+
+## 🔒 DevSecOps Integration
+
+- **Trivy Scanning**:  
+  - Scans filesystem, dependencies, and container images.  
+  - Detects vulnerabilities, misconfigurations, and secrets.  
+- **Pipeline Enforcement**: Build fails if critical vulnerabilities are detected (optional configurable).  
+- **Continuous Security**: Security scanning runs on every commit before deployment.  
+
+---
+
+## 🌐 Access
+
+- **Portfolio Website**: [Your live URL here]  
+- **Source Code**: [GitHub Repository link]  
+
+---
+
+## 📫 Contact
+
+- **Email**: Perpyayogu@gmail.com  
+- **Phone**: +1 510-820-3736  
+
+---
+
+> This project demonstrates real-world DevOps practices, combining **automation, cloud deployment, security, and monitoring** into a single workflow.
