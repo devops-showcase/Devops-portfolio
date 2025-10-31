@@ -29,7 +29,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe all sections for animation
 document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('.skills-section, .experience-section, .projects-section, .contact-section');
+  const sections = document.querySelectorAll('.skills-section, .experience-section, .projects-section, .certifications-section, .contact-section');
   
   sections.forEach(section => {
     section.style.opacity = '0';
@@ -64,6 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
     card.style.transition = `opacity 0.5s ease ${index * 0.15}s, transform 0.5s ease ${index * 0.15}s`;
     observer.observe(card);
   });
+
+  // Animate certification cards
+  const certCards = document.querySelectorAll('.cert-card');
+  certCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.5s ease ${index * 0.2}s, transform 0.5s ease ${index * 0.2}s`;
+    observer.observe(card);
+  });
 });
 
 // Add active state to navigation on scroll
@@ -90,5 +99,5 @@ window.addEventListener('scroll', () => {
 
 // Console message for visitors
 console.log('%c👋 Hi there!', 'color: #007bff; font-size: 24px; font-weight: bold;');
-console.log('%cWelcome to my portfolio! Feel free to explore.', 'color: #555; font-size: 14px;');
-console.log('%cInterested in the code? Check out my GitHub: https://github.com/devops-showcase', 'color: #00b4d8; font-size: 12px;');
+console.log('%cWelcome to Kizito\'s portfolio!', 'color: #555; font-size: 14px;');
+console.log('%c12+ years of DevOps excellence!', 'color: #00b4d8; font-size: 12px;');
