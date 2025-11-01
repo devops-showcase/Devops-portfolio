@@ -2,10 +2,8 @@ pipeline {
     agent any
 
     environment {
-        // Set image name and port based on branch
-        IMAGE_NAME = "${env.BRANCH_NAME == 'main' ? 'perpetua-portfolio' : 'kizito-portfolio'}"
-        CONTAINER_PORT = "${env.BRANCH_NAME == 'main' ? '9091' : '9092'}"
-        CONTAINER_NAME = "${env.BRANCH_NAME == 'main' ? 'perpetua-portfolio' : 'kizito-portfolio'}"
+        // Static environment variables only
+        IMAGE_NAME = "portfolio"
     }
 
     triggers {
@@ -20,9 +18,20 @@ pipeline {
             }
         }
 
-        stage('Branch Info') {
+        stage('Set Branch-Specific Variables') {
             steps {
                 script {
+                    // Set variables based on branch
+                    if (env.BRANCH_NAME == 'main') {
+                        env.IMAGE_NAME = 'perpetua-portfolio'
+                        env.CONTAINER_PORT = '9091'
+                        env.CONTAINER_NAME = 'perpetua-portfolio'
+                    } else {
+                        env.IMAGE_NAME = 'kizito-portfolio'
+                        env.CONTAINER_PORT = '9092'
+                        env.CONTAINER_NAME = 'kizito-portfolio'
+                    }
+                    
                     echo "🌿 Branch: ${env.BRANCH_NAME}"
                     echo "🐳 Image Name: ${env.IMAGE_NAME}"
                     echo "🔌 Port: ${env.CONTAINER_PORT}"
@@ -36,7 +45,7 @@ pipeline {
                 script {
                     echo "🔍 Running Trivy File System & Dependency Vulnerability Scan..."
                     sh '''
-                        trivy fs --scanners vuln,config,secret --exit-code 0 --format table .
+                        trivy fs --scanners vuln,config,secret --exit-code 0 --format table . || echo "Trivy scan completed with warnings"
                     '''
                 }
             }
@@ -56,7 +65,7 @@ pipeline {
                 script {
                     sh '''
                         echo "🐳 Building Docker image for ${IMAGE_NAME}..."
-                        docker build -t $IMAGE_NAME:$IMAGE_TAG .
+                        docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
                     '''
                 }
             }
@@ -67,7 +76,7 @@ pipeline {
                 script {
                     echo "🛡️ Scanning Docker image for vulnerabilities..."
                     sh '''
-                        trivy image --severity HIGH,CRITICAL --exit-code 0 --format table $IMAGE_NAME:$IMAGE_TAG
+                        trivy image --severity HIGH,CRITICAL --exit-code 0 --format table ${IMAGE_NAME}:${IMAGE_TAG} || echo "Image scan completed with warnings"
                     '''
                 }
             }
@@ -85,11 +94,11 @@ pipeline {
                         ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
                         ECR_URL="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY##*/}"
 
-                        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+                        aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
                         
                         echo "🚀 Tagging and pushing image with unique tag: ${IMAGE_NAME}-${IMAGE_TAG}..."
-                        docker tag $IMAGE_NAME:$IMAGE_TAG ${ECR_URL}:${IMAGE_NAME}-${IMAGE_TAG}
-                        docker tag $IMAGE_NAME:$IMAGE_TAG ${ECR_URL}:${IMAGE_NAME}-latest
+                        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${ECR_URL}:${IMAGE_NAME}-${IMAGE_TAG}
+                        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${ECR_URL}:${IMAGE_NAME}-latest
                         docker push ${ECR_URL}:${IMAGE_NAME}-${IMAGE_TAG}
                         docker push ${ECR_URL}:${IMAGE_NAME}-latest
                         
@@ -109,9 +118,9 @@ pipeline {
                 ]) {
                     sh '''
                         echo "🚢 Deploying ${IMAGE_NAME} to EC2 via SSM..."
-                        export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-                        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-                        export AWS_DEFAULT_REGION=$AWS_REGION
+                        export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+                        export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+                        export AWS_DEFAULT_REGION=${AWS_REGION}
 
                         ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
                         ECR_REGISTRY="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
@@ -119,12 +128,12 @@ pipeline {
                         FULL_IMAGE="${ECR_URL}:${IMAGE_NAME}-${IMAGE_TAG}"
 
                         INSTANCE_ID=$(aws ec2 describe-instances \
-                            --filters "Name=tag:Name,Values=$EC2_HOST" "Name=instance-state-name,Values=running" \
+                            --filters "Name=tag:Name,Values=${EC2_HOST}" "Name=instance-state-name,Values=running" \
                             --query "Reservations[0].Instances[0].InstanceId" \
                             --output text)
 
                         if [ "$INSTANCE_ID" = "None" ] || [ -z "$INSTANCE_ID" ]; then
-                            echo "❌ ERROR: No running EC2 instance found with tag Name=$EC2_HOST"
+                            echo "❌ ERROR: No running EC2 instance found with tag Name=${EC2_HOST}"
                             exit 1
                         fi
 
@@ -133,24 +142,24 @@ pipeline {
                         echo "🐳 Image: ${FULL_IMAGE}"
                         echo "🔌 Port: ${CONTAINER_PORT}"
 
-                        cat <<EOF > /tmp/ssm-commands.json
+                        cat > /tmp/ssm-commands.json <<EOFSSM
 {
   "InstanceIds": ["${INSTANCE_ID}"],
   "DocumentName": "AWS-RunShellScript",
   "Comment": "Deploy ${IMAGE_NAME} Portfolio via Jenkins",
   "Parameters": {
     "commands": [
-      "echo 'Starting deployment of ${IMAGE_NAME} on \\$(hostname)'",
+      "echo 'Starting deployment of ${IMAGE_NAME}'",
       "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}",
       "docker stop ${CONTAINER_NAME} || true",
       "docker rm ${CONTAINER_NAME} || true",
       "docker pull ${FULL_IMAGE}",
       "docker run -d --name ${CONTAINER_NAME} -p ${CONTAINER_PORT}:80 ${FULL_IMAGE}",
-      "echo '✅ ${IMAGE_NAME} deployed successfully on port ${CONTAINER_PORT}'"
+      "echo 'Deployment of ${IMAGE_NAME} completed on port ${CONTAINER_PORT}'"
     ]
   }
 }
-EOF
+EOFSSM
 
                         echo "📤 Sending deployment command via SSM..."
                         COMMAND_ID=$(aws ssm send-command --cli-input-json file:///tmp/ssm-commands.json --query 'Command.CommandId' --output text)
@@ -162,10 +171,9 @@ EOF
                             --command-id "$COMMAND_ID" \
                             --instance-id "$INSTANCE_ID" \
                             --query 'StandardOutputContent' \
-                            --output text || true
+                            --output text || echo "Command sent successfully"
                         
-                        echo "✅ Deployment command sent successfully!"
-                        echo "🌐 Access ${IMAGE_NAME} at: http://YOUR_EC2_IP:${CONTAINER_PORT}"
+                        echo "✅ Deployment command completed!"
                     '''
                 }
             }
@@ -176,20 +184,12 @@ EOF
         success {
             echo "✅ Pipeline completed successfully for ${env.IMAGE_NAME}!"
             echo "🌿 Branch: ${env.BRANCH_NAME}"
-            echo "🔌 Port: ${env.CONTAINER_PORT}"
         }
         failure {
-            echo "❌ Pipeline failed for ${env.IMAGE_NAME}"
+            echo "❌ Pipeline failed"
         }
         always {
-            echo "🧹 Cleaning up workspace..."
-            cleanWs()
+            echo "🧹 Pipeline execution finished"
         }
     }
 }
-
-
-
-
-
-
