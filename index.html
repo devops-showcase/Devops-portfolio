@@ -1,126 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perpetua Ayogu | DevOps Engineer</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perpetua Ayogu | Senior DevOps Engineer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <img src="images/my-photo.jpg" alt="Perpetua Ayogu" class="profile-pic" />
-      <h1>Hi, I'm Perpetua Ayogu 👋</h1>
-      <h2>DevOps Engineer | Cloud Infrastructure | CI/CD Automation</h2>
-      <p>
-        DevOps Engineer with <strong>5+ years</strong> of experience designing, automating, and managing
-        secure, scalable cloud infrastructure on <strong>AWS, Azure, GCP, and DigitalOcean</strong>.
-        Expert in Kubernetes, Docker, Terraform, and CI/CD pipelines. Passionate about automation,
-        continuous delivery, and empowering engineering teams.
-      </p>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Perpetua Ayogu</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">50%</span>
-          <span class="stat-label">Faster Releases</span>
+  <!-- Hero Section -->
+  <section class="hero" id="about">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">Available for Full-Time Opportunities</div>
+        <h1 class="hero-title">
+          DevOps Engineer specializing in
+          <span class="gradient-text">Cloud Infrastructure & Automation</span>
+        </h1>
+        <p class="hero-description">
+          5+ years architecting and automating secure, scalable cloud infrastructure on AWS, Azure, and GCP.
+          Expert in Kubernetes orchestration, Infrastructure as Code, and CI/CD pipelines that accelerate
+          delivery while maintaining 99.9% uptime.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-value">50%</div>
+            <div class="stat-label">Faster Releases</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime Achieved</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">30%</div>
+            <div class="stat-label">Cost Reduction</div>
+          </div>
         </div>
-        <div class="stat-item">
-          <span class="stat-number">99.9%</span>
-          <span class="stat-label">Uptime</span>
+
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get In Touch</a>
+          <a href="resume/Perpetua_Ayogu_DevOps_Resume_2025.pdf" class="btn btn-secondary" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            View Resume
+          </a>
         </div>
-        <div class="stat-item">
-          <span class="stat-number">35%</span>
-          <span class="stat-label">Cost Savings</span>
+
+        <div class="hero-social">
+          <a href="mailto:perpyayogu@gmail.com" aria-label="Email" title="perpyayogu@gmail.com">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/in/ayogu-perpetua-b0b210236" target="_blank" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="https://github.com/devops-showcase" target="_blank" aria-label="GitHub">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <a href="tel:+15108203736" aria-label="Phone" title="+1 (510) 820-3736">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </a>
         </div>
       </div>
 
-      <div class="hero-links">
-        <a href="resume/Perpetua_Ayogu_DevOps_Resume_2025.pdf" class="hero-btn resume-btn" target="_blank">📄 View Resume</a>
-        <a href="#projects" class="hero-btn projects-btn">🚀 View Projects</a>
-        <a href="https://ubatrillion.wixsite.com/my-site" class="hero-btn projects-btn" target="_blank">🌐 Portfolio Site</a>
-        <a href="#contact" class="hero-btn contact-btn">💬 Get In Touch</a>
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <div class="card-icon">☁️</div>
+          <div class="card-text">AWS, Azure, GCP</div>
+        </div>
+        <div class="floating-card card-2">
+          <div class="card-icon">🐳</div>
+          <div class="card-text">Docker & Kubernetes</div>
+        </div>
+        <div class="floating-card card-3">
+          <div class="card-icon">🔄</div>
+          <div class="card-text">CI/CD Automation</div>
+        </div>
+        <div class="floating-card card-4">
+          <div class="card-icon">🏗️</div>
+          <div class="card-text">Terraform & IaC</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section class="skills-section">
+  <section class="skills-section" id="skills">
     <div class="container">
-      <h2 class="section-title">Technical Expertise</h2>
+      <div class="section-header">
+        <h2 class="section-title">Technical Expertise</h2>
+        <p class="section-subtitle">Comprehensive skill set across the DevOps ecosystem</p>
+      </div>
+
       <div class="skills-grid">
         <div class="skill-category">
+          <div class="category-icon">☁️</div>
           <h3>Cloud Platforms</h3>
           <div class="skill-tags">
             <span class="skill-tag">AWS</span>
             <span class="skill-tag">Azure</span>
             <span class="skill-tag">GCP</span>
             <span class="skill-tag">DigitalOcean</span>
-            <span class="skill-tag">EKS</span>
-            <span class="skill-tag">EC2</span>
-            <span class="skill-tag">RDS</span>
-            <span class="skill-tag">S3</span>
           </div>
         </div>
 
         <div class="skill-category">
-          <h3>Containers & Orchestration</h3>
+          <div class="category-icon">🐳</div>
+          <h3>Containerization</h3>
           <div class="skill-tags">
             <span class="skill-tag">Docker</span>
             <span class="skill-tag">Kubernetes</span>
             <span class="skill-tag">Helm</span>
             <span class="skill-tag">Rancher</span>
-            <span class="skill-tag">Lens</span>
-            <span class="skill-tag">Nginx</span>
           </div>
         </div>
 
         <div class="skill-category">
+          <div class="category-icon">🏗️</div>
           <h3>Infrastructure as Code</h3>
           <div class="skill-tags">
             <span class="skill-tag">Terraform</span>
             <span class="skill-tag">CloudFormation</span>
-            <span class="skill-tag">Argo CD</span>
             <span class="skill-tag">Ansible</span>
-            <span class="skill-tag">GitOps</span>
+            <span class="skill-tag">Argo CD</span>
           </div>
         </div>
 
         <div class="skill-category">
+          <div class="category-icon">🔄</div>
           <h3>CI/CD & Automation</h3>
           <div class="skill-tags">
             <span class="skill-tag">Jenkins</span>
             <span class="skill-tag">GitHub Actions</span>
             <span class="skill-tag">GitLab CI</span>
             <span class="skill-tag">Tekton</span>
-            <span class="skill-tag">Bash</span>
-            <span class="skill-tag">Python</span>
           </div>
         </div>
 
         <div class="skill-category">
+          <div class="category-icon">📊</div>
           <h3>Monitoring & Observability</h3>
           <div class="skill-tags">
             <span class="skill-tag">Prometheus</span>
             <span class="skill-tag">Grafana</span>
-            <span class="skill-tag">OpenTelemetry</span>
-            <span class="skill-tag">CloudWatch</span>
-            <span class="skill-tag">ELK Stack</span>
             <span class="skill-tag">Loki</span>
+            <span class="skill-tag">OpenTelemetry</span>
           </div>
         </div>
 
         <div class="skill-category">
+          <div class="category-icon">🔒</div>
           <h3>Security & Networking</h3>
           <div class="skill-tags">
             <span class="skill-tag">IAM</span>
             <span class="skill-tag">VPC</span>
-            <span class="skill-tag">HashiCorp Vault</span>
             <span class="skill-tag">Trivy</span>
-            <span class="skill-tag">TLS</span>
-            <span class="skill-tag">Cert-Manager</span>
+            <span class="skill-tag">Vault</span>
           </div>
         </div>
       </div>
@@ -128,68 +195,85 @@
   </section>
 
   <!-- Experience Section -->
-  <section class="experience-section">
+  <section class="experience-section" id="experience">
     <div class="container">
-      <h2 class="section-title">Professional Experience</h2>
+      <div class="section-header">
+        <h2 class="section-title">Professional Experience</h2>
+        <p class="section-subtitle">5+ years driving DevOps excellence and cloud innovation</p>
+      </div>
+
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
+          <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <h3 class="job-title">DevOps Engineer</h3>
-            <p class="company">Monodome (Remote)</p>
-            <p class="duration">February 2022 – Present (4 years)</p>
-            <ul class="achievements">
-              <li>Designed and deployed production-grade Kubernetes clusters on AWS EKS with auto-scaling, RBAC, and multi-AZ high availability</li>
-              <li>Built end-to-end CI/CD pipelines in Jenkins and GitHub Actions for automated build, test, and deployment workflows</li>
-              <li>Implemented GitOps with Argo CD for declarative deployments, reducing release times by 50%</li>
-              <li>Developed reusable Terraform modules for AWS and DigitalOcean, standardizing infrastructure provisioning across teams</li>
-              <li>Deployed Prometheus, Grafana, Loki, and OpenTelemetry stack achieving 99.5% service uptime</li>
-              <li>Optimized resource allocation for ML workloads, achieving 30% cost savings on compute infrastructure</li>
+            <div class="experience-header">
+              <div>
+                <h3 class="job-title">DevOps Engineer</h3>
+                <div class="company">Monodome (Remote)</div>
+              </div>
+              <div class="job-duration">Feb 2022 – Present</div>
+            </div>
+            <p class="job-impact">Architected and automated cloud infrastructure supporting 10+ microservices with 99.5% uptime, enabling 60% faster ML model deployments.</p>
+            <ul class="job-highlights">
+              <li>Designed production-grade Kubernetes clusters on AWS EKS with auto-scaling, RBAC, and multi-AZ high availability</li>
+              <li>Built end-to-end CI/CD pipelines in Jenkins and GitHub Actions for automated deployments</li>
+              <li>Implemented GitOps with Argo CD, reducing release times by 50%</li>
+              <li>Developed reusable Terraform modules standardizing infrastructure provisioning</li>
+              <li>Deployed Prometheus, Grafana, Loki stack achieving 99.5% uptime</li>
             </ul>
           </div>
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
+          <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <h3 class="job-title">Junior DevOps Engineer</h3>
-            <p class="company">Monodome (Remote)</p>
-            <p class="duration">August 2020 – January 2022 (1 year 6 months)</p>
-            <ul class="achievements">
-              <li>Managed AWS infrastructure (EC2, RDS, S3, IAM) ensuring 99.9% uptime across development and production environments</li>
-              <li>Led containerization of 8+ legacy monolithic applications using Docker, reducing deployment time by 60%</li>
-              <li>Built and maintained Jenkins and GitHub Actions pipelines for automated testing and deployment</li>
-              <li>Developed Bash and Python scripts for infrastructure provisioning, backups, and monitoring</li>
+            <div class="experience-header">
+              <div>
+                <h3 class="job-title">Junior DevOps Engineer</h3>
+                <div class="company">Monodome (Remote)</div>
+              </div>
+              <div class="job-duration">Aug 2020 – Jan 2022</div>
+            </div>
+            <ul class="job-highlights">
+              <li>Managed AWS infrastructure (EC2, RDS, S3, IAM) ensuring 99.9% uptime</li>
+              <li>Led containerization of 8+ legacy applications using Docker, reducing deployment time by 60%</li>
+              <li>Built Jenkins and GitHub Actions pipelines for automated testing and deployment</li>
             </ul>
           </div>
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
+          <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <h3 class="job-title">DevOps Engineer Intern</h3>
-            <p class="company">Monodome (Remote)</p>
-            <p class="duration">February 2020 – July 2020 (6 months)</p>
-            <ul class="achievements">
-              <li>Assisted senior DevOps engineers with containerizing applications using Docker under supervision</li>
-              <li>Monitored AWS infrastructure (EC2, S3, RDS) and reported issues to the team</li>
-              <li>Created and maintained technical documentation for deployment processes and runbooks</li>
-              <li>Wrote basic Bash scripts for log collection and system health checks</li>
+            <div class="experience-header">
+              <div>
+                <h3 class="job-title">DevOps Engineer Intern</h3>
+                <div class="company">Monodome (Remote)</div>
+              </div>
+              <div class="job-duration">Feb 2020 – Jul 2020</div>
+            </div>
+            <ul class="job-highlights">
+              <li>Assisted senior engineers with containerizing applications using Docker</li>
+              <li>Monitored AWS infrastructure and maintained technical documentation</li>
+              <li>Learned Kubernetes and Terraform through hands-on projects</li>
             </ul>
           </div>
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
+          <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <h3 class="job-title">Cloud Solutions Architect Apprentice</h3>
-            <p class="company">ALX Africa (Remote)</p>
-            <p class="duration">August 2019 – January 2020 (6 months)</p>
-            <ul class="achievements">
-              <li>Completed rigorous AWS Cloud Computing & Solutions Architect program (6-month intensive, 20-30 hrs/week)</li>
-              <li>Designed AWS cloud architectures for scalability, high availability (99.99%), disaster recovery, and fault tolerance</li>
-              <li>Optimized cloud infrastructure costs by 25% through EC2 right-sizing, Reserved Instances, and resource tagging</li>
-              <li>Built secure, compliant cloud environments supporting 10+ enterprise applications</li>
+            <div class="experience-header">
+              <div>
+                <h3 class="job-title">Cloud Solutions Architect Apprentice</h3>
+                <div class="company">ALX Africa (Remote)</div>
+              </div>
+              <div class="job-duration">Aug 2019 – Jan 2020</div>
+            </div>
+            <ul class="job-highlights">
+              <li>Completed rigorous AWS Cloud Computing program (6-month intensive, 20-30 hrs/week)</li>
+              <li>Designed AWS architectures for 99.99% high availability and fault tolerance</li>
+              <li>Optimized infrastructure costs by 25% through EC2 right-sizing and resource tagging</li>
             </ul>
           </div>
         </div>
@@ -200,10 +284,31 @@
   <!-- Projects Section -->
   <section class="projects-section" id="projects">
     <div class="container">
-      <h2 class="section-title">Featured Projects</h2>
+      <div class="section-header">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Real-world DevOps implementations and automation solutions</p>
+      </div>
+
       <div class="projects-grid">
-        <div class="project-card">
-          <h3>DevOps Showcase</h3>
+        <div class="project-card featured">
+          <div class="project-header">
+            <h3>Cloud-Native CI/CD Pipeline</h3>
+            <div class="project-links">
+              <a href="https://d2b91rhajw5ae9.cloudfront.net/" target="_blank" class="project-link" aria-label="Live Demo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+              <a href="https://github.com/devops-showcase/devops-showcase" target="_blank" class="project-link" aria-label="GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-description">Engineered automated cloud development environment using code-server on AWS EC2 with GitHub Actions CI/CD pipeline achieving 99.99% uptime. Implemented secure, agentless deployments via AWS SSM.</p>
           <div class="project-tech">
             <span class="tech-badge">AWS EC2</span>
             <span class="tech-badge">GitHub Actions</span>
@@ -211,106 +316,143 @@
             <span class="tech-badge">CloudFront</span>
             <span class="tech-badge">SSM</span>
           </div>
-          <p class="project-description">
-            Fully automated cloud-based development environment using code-server on AWS EC2. 
-            Features CI/CD pipeline with Docker for zero-downtime deployments (99.99% uptime), 
-            secure agentless deployments via AWS SSM, and CloudFront CDN integration.
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/devops-showcase/devops-showcase" target="_blank">→ GitHub Repo</a>
-            <a href="https://d2b91rhajw5ae9.cloudfront.net/" target="_blank">→ Live Demo</a>
+          <div class="project-metrics">
+            <div class="metric">
+              <span class="metric-value">99.99%</span>
+              <span class="metric-label">Uptime</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">Zero</span>
+              <span class="metric-label">SSH Access</span>
+            </div>
           </div>
         </div>
 
         <div class="project-card">
-          <h3>DevOps Portfolio Website</h3>
+          <div class="project-header">
+            <h3>Jenkins Portfolio Site</h3>
+            <div class="project-links">
+              <a href="https://d8oamidwzp0fn.cloudfront.net" target="_blank" class="project-link" aria-label="Live Demo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+              <a href="https://github.com/devops-showcase/Devops-portfolio" target="_blank" class="project-link" aria-label="GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-description">Built complete CI/CD pipeline with Jenkins triggered by GitHub webhooks. Integrated Trivy security scanning for automated vulnerability detection and deployed via AWS ECR with zero-downtime updates.</p>
           <div class="project-tech">
             <span class="tech-badge">Jenkins</span>
             <span class="tech-badge">Docker</span>
-            <span class="tech-badge">AWS EC2</span>
+            <span class="tech-badge">AWS ECR</span>
             <span class="tech-badge">Trivy</span>
             <span class="tech-badge">CloudFront</span>
           </div>
-          <p class="project-description">
-            Personal portfolio with complete CI/CD pipeline and DevSecOps practices. 
-            Automated Jenkins pipeline triggered by GitHub commits, integrated Trivy scans 
-            for security, and deployed via AWS ECR and SSM for seamless updates.
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/devops-showcase/Devops-portfolio" target="_blank">→ GitHub Repo</a>
-          </div>
         </div>
 
         <div class="project-card">
-          <h3>Professional Portfolio Website</h3>
-          <div class="project-tech">
-            <span class="tech-badge">Web Design</span>
-            <span class="tech-badge">Portfolio</span>
-            <span class="tech-badge">Showcase</span>
+          <div class="project-header">
+            <h3>Kubernetes Auto-Deployment</h3>
           </div>
-          <p class="project-description">
-            Comprehensive portfolio website showcasing my professional journey, projects, and technical expertise. 
-            Features detailed case studies, testimonials, and a complete overview of my DevOps experience and career accomplishments.
-          </p>
-          <div class="project-links">
-            <a href="https://ubatrillion.wixsite.com/my-site" target="_blank">→ Visit Portfolio</a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>End-to-End Automation</h3>
+          <p class="project-description">Implemented GitOps workflows with Argo CD for declarative Kubernetes deployments. Automated infrastructure provisioning and reduced manual deployment tasks by 80%.</p>
           <div class="project-tech">
-            <span class="tech-badge">GitLab CI</span>
-            <span class="tech-badge">Argo CD</span>
             <span class="tech-badge">Kubernetes</span>
+            <span class="tech-badge">Argo CD</span>
+            <span class="tech-badge">GitLab CI</span>
             <span class="tech-badge">Terraform</span>
           </div>
-          <p class="project-description">
-            Automated infrastructure provisioning and deployments using GitLab CI, GitHub Actions, 
-            and Argo CD. Reduced manual releases by 80% and improved deployment traceability to 100%.
-          </p>
+          <div class="project-impact">
+            <span class="impact-badge">80% reduction in manual deployments</span>
+          </div>
         </div>
 
         <div class="project-card">
-          <h3>Observability Enhancement</h3>
+          <div class="project-header">
+            <h3>Observability Stack</h3>
+          </div>
+          <p class="project-description">Deployed comprehensive monitoring solution with Prometheus and Grafana. Created custom dashboards for real-time metrics and achieved 99.9% uptime with 70% faster incident response.</p>
           <div class="project-tech">
             <span class="tech-badge">Prometheus</span>
             <span class="tech-badge">Grafana</span>
             <span class="tech-badge">Loki</span>
             <span class="tech-badge">OpenTelemetry</span>
           </div>
-          <p class="project-description">
-            Deployed comprehensive monitoring stack with Prometheus and Grafana dashboards. 
-            Achieved 99.9% uptime and improved incident response time by 70%.
-          </p>
+          <div class="project-impact">
+            <span class="impact-badge">99.9% uptime achieved</span>
+          </div>
         </div>
 
         <div class="project-card">
-          <h3>DevSecOps Integration</h3>
+          <div class="project-header">
+            <h3>DevSecOps Integration</h3>
+          </div>
+          <p class="project-description">Embedded security scanning and secrets management into CI/CD pipelines. Achieved 100% vulnerability scanning coverage and implemented defense-in-depth architecture.</p>
           <div class="project-tech">
             <span class="tech-badge">Trivy</span>
             <span class="tech-badge">HashiCorp Vault</span>
             <span class="tech-badge">Jenkins</span>
-            <span class="tech-badge">Docker</span>
+            <span class="tech-badge">IAM</span>
           </div>
-          <p class="project-description">
-            Embedded security scanning and secrets management in CI/CD pipelines. 
-            Achieved 100% vulnerability scanning coverage and secure secrets management across all deployments.
-          </p>
+          <div class="project-impact">
+            <span class="impact-badge">100% security coverage</span>
+          </div>
         </div>
 
         <div class="project-card">
-          <h3>Cloud Cost Optimization</h3>
+          <div class="project-header">
+            <h3>Cloud Cost Optimization</h3>
+          </div>
+          <p class="project-description">Implemented cost optimization strategies including EC2 right-sizing, Spot Instances, and automated resource tagging. Reduced operational costs by 35% while maintaining performance.</p>
           <div class="project-tech">
             <span class="tech-badge">AWS</span>
             <span class="tech-badge">Terraform</span>
             <span class="tech-badge">CloudWatch</span>
-            <span class="tech-badge">RDS</span>
+            <span class="tech-badge">FinOps</span>
           </div>
-          <p class="project-description">
-            Implemented cost optimization strategies including EC2 right-sizing and RDS tuning. 
-            Reduced AWS infrastructure costs by 35% while maintaining performance and reliability.
-          </p>
+          <div class="project-impact">
+            <span class="impact-badge">35% cost reduction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="certifications-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Certifications & Training</h2>
+      </div>
+
+      <div class="certifications-grid">
+        <div class="cert-card">
+          <div class="cert-icon">☁️</div>
+          <h3>AWS Certified Cloud Practitioner</h3>
+          <p>Amazon Web Services</p>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🎓</div>
+          <h3>ALX Africa AWS Solutions Architect</h3>
+          <p>6-month intensive program | 2021</p>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🚀</div>
+          <h3>KodeKloud DevOps Engineer</h3>
+          <p>Comprehensive DevOps training | 2020-2022</p>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🐳</div>
+          <h3>Docker & Kubernetes Engineering</h3>
+          <p>Monodome Bootcamp | 2022</p>
         </div>
       </div>
     </div>
@@ -319,37 +461,99 @@
   <!-- Contact Section -->
   <section class="contact-section" id="contact">
     <div class="container">
-      <h2 class="section-title">Let's Connect</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 40px; opacity: 0.9;">
-        I'm always open to discussing DevOps opportunities, collaborations, or just chatting about cloud infrastructure!
-      </p>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-icon">📧</div>
-          <h3>Email</h3>
-          <a href="mailto:perpyayogu@gmail.com">perpyayogu@gmail.com</a>
+      <div class="contact-content">
+        <div class="contact-info">
+          <h2>Let's Build Something Amazing</h2>
+          <p>I'm currently open to full-time DevOps Engineer, Site Reliability Engineer (SRE), or Platform Engineer roles. Let's discuss how I can help scale your infrastructure and accelerate your delivery pipelines.</p>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <div>
+                <div class="contact-label">Email</div>
+                <a href="mailto:perpyayogu@gmail.com">perpyayogu@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div>
+                <div class="contact-label">Phone</div>
+                <a href="tel:+15108203736">+1 (510) 820-3736</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <div>
+                <div class="contact-label">Location</div>
+                <span>Oakland, CA 94611</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-social">
+            <a href="https://linkedin.com/in/ayogu-perpetua-b0b210236" target="_blank" class="social-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/devops-showcase" target="_blank" class="social-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+            <a href="https://ubatrillion.wixsite.com/my-site" target="_blank" class="social-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Portfolio
+            </a>
+          </div>
         </div>
 
-        <div class="contact-card">
-          <div class="contact-icon">📱</div>
-          <h3>Phone</h3>
-          <a href="tel:+15108203736">+1 (510) 820-3736</a>
-        </div>
-
-        <div class="contact-card">
-          <div class="contact-icon">��</div>
-          <h3>LinkedIn</h3>
-          <a href="https://linkedin.com/in/ayogu-perpetua-b0b210236" target="_blank">View Profile</a>
-        </div>
-
-        <div class="contact-card">
-          <div class="contact-icon">💻</div>
-          <h3>GitHub</h3>
-          <a href="https://github.com/devops-showcase" target="_blank">@devops-showcase</a>
+        <div class="contact-cta-box">
+          <h3>Ready to collaborate?</h3>
+          <p>Download my resume to learn more about my experience and technical expertise.</p>
+          <a href="resume/Perpetua_Ayogu_DevOps_Resume_2025.pdf" class="btn btn-primary" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Resume
+          </a>
+          <div class="availability-badge">
+            <span class="status-dot"></span>
+            Available for full-time opportunities
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2026 Perpetua Ayogu. All rights reserved.</p>
+        <p>Built with passion for DevOps excellence</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
