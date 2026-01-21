@@ -197,7 +197,7 @@ Completed ALX Foundations curriculum covering professional soft skills including
 Architected and deployed enterprise-grade Kubernetes infrastructure for portfolio website demonstrating production-ready cloud-native practices:
 
 **High Availability & Scalability:**
-- Deployed Kubernetes cluster with 3-10 replica auto-scaling using Horizontal Pod Autoscaler (HPA) based on CPU (70%) and memory (80%) thresholds
+- Deployed Kubernetes cluster with 2-4 replica auto-scaling using Horizontal Pod Autoscaler (HPA) based on CPU (70%) and memory (80%) thresholds
 - Implemented rolling update strategy with zero-downtime deployments (maxUnavailable: 0) achieving 99.9% uptime SLA
 - Configured liveness and readiness probes for automatic health monitoring and self-healing capabilities
 

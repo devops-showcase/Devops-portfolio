@@ -5,16 +5,16 @@ This directory contains Kubernetes manifests for deploying the portfolio applica
 ## Architecture Overview
 
 ```
-Internet → CloudFront CDN → Ingress Controller (NGINX) → Service → Pods (3-10 replicas)
+Internet → CloudFront CDN → Ingress Controller (NGINX) → Service → Pods (2-4 replicas)
 ```
 
 ## Features
 
 ### High Availability
-- **3 replicas minimum** with pod anti-affinity for multi-node distribution
+- **2 replicas minimum** with pod anti-affinity for multi-node distribution
 - **Rolling updates** with zero downtime (maxUnavailable: 0)
 - **Health checks**: Liveness and readiness probes ensure traffic only to healthy pods
-- **Auto-scaling**: HPA scales from 3-10 replicas based on CPU (70%) and memory (80%)
+- **Auto-scaling**: HPA scales from 2-4 replicas based on CPU (70%) and memory (80%)
 
 ### Security
 - **Non-root containers**: Runs as user 101 (nginx)

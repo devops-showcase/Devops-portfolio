@@ -30,7 +30,7 @@ This portfolio is deployed on **production-grade Kubernetes infrastructure** wit
 └──────┬──────────────────────────────────────────┘
        │
 ┌──────▼──────────────────────────────────────────┐
-│     Deployment (3-10 replicas with HPA)         │
+│     Deployment (2-4 replicas with HPA)         │
 │  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐         │
 │  │ Pod  │  │ Pod  │  │ Pod  │  │ Pod  │  ...    │
 │  │nginx │  │nginx │  │nginx │  │nginx │         │
@@ -41,7 +41,7 @@ This portfolio is deployed on **production-grade Kubernetes infrastructure** wit
 ## ✨ Features
 
 ### High Availability & Scalability
-- ⚡ **Auto-scaling**: 3-10 replicas based on CPU (70%) and memory (80%) utilization
+- ⚡ **Auto-scaling**: 2-4 replicas based on CPU (70%) and memory (80%) utilization
 - 🔄 **Rolling updates**: Zero-downtime deployments with `maxUnavailable: 0`
 - 💚 **Health checks**: Liveness and readiness probes ensure 99.9% uptime
 - 🌍 **Multi-replica**: Pod anti-affinity for distribution across nodes
@@ -140,7 +140,7 @@ docker run -p 8080:80 portfolio:local
 
 | Resource | Minimum | Maximum | Auto-scale Target |
 |----------|---------|---------|-------------------|
-| **Replicas** | 3 | 10 | CPU: 70%, Mem: 80% |
+| **Replicas** | 2 | 4 | CPU: 70%, Mem: 80% |
 | **CPU** | 100m | 200m | Per pod |
 | **Memory** | 64Mi | 128Mi | Per pod |
 
@@ -203,7 +203,7 @@ kubectl get events -n portfolio --sort-by='.lastTimestamp'
 
 - **Efficient base image**: `nginx:alpine` (5MB vs 133MB)
 - **Right-sized resources**: Minimal CPU/memory for static site
-- **Auto-scaling**: Scales down during low traffic (minimum 3)
+- **Auto-scaling**: Scales down during low traffic (minimum 2)
 - **CDN offloading**: CloudFront handles 90% of requests
 - **Spot instances**: Run Kubernetes nodes on EC2 spot for 70% savings
 
