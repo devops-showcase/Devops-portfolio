@@ -167,6 +167,27 @@ body {
   max-width: 600px;
 }
 
+.hero-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.hero-profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+}
+
+.hero-profile-pic:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-xl);
+}
+
 .hero-badge {
   display: inline-block;
   background: linear-gradient(135deg, var(--primary-light), var(--primary));
@@ -969,5 +990,74 @@ section {
 
   section {
     padding: 4rem 0;
+  }
+}
+
+/* Education Section */
+.education-section {
+  background: var(--bg-secondary);
+}
+
+.education-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.education-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  transition: var(--transition);
+}
+
+.education-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.education-icon {
+  font-size: 4rem;
+  flex-shrink: 0;
+}
+
+.education-details h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.education-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.university {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.education-year {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+  .education-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .education-meta {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
